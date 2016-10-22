@@ -721,5 +721,11 @@ class IPluginInterface(object):
                      been folded into wantModule.
         """
         pass
+
+    def getReturnValue(self):
+        """Allow the plugin to pass a variable to return with the main
+        nose run method."""
+        pass
+
     wantModuleTests.deprecated = True
-    
+

@@ -206,6 +206,10 @@ class TestProgram(unittest.TestProgram):
             self.testRunner = plug_runner
         result = self.testRunner.run(self.test)
         self.success = result.wasSuccessful()
+
+        # add value to return
+        self.return_value = self.config.plugins.getReturnValue()
+
         if self.exit:
             sys.exit(not self.success)
         return self.success
@@ -298,7 +302,9 @@ def run(*arg, **kw):
     to False.
     """
     kw['exit'] = False
-    return TestProgram(*arg, **kw).success
+    # modification to return a plugin value instead of the state of the test
+    # return TestProgram(*arg, **kw).success
+    return TestProgram(*arg, **kw).return_value
 
 
 def runmodule(name='__main__', **kw):
